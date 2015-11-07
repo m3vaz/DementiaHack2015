@@ -1,3 +1,7 @@
+# Project specificc things
+creds.txt
+push.bat
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
