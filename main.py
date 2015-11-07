@@ -8,7 +8,7 @@ app = Flask(__name__)
 # When running this app on the local machine, default the port to 8080
 port = int(os.getenv('VCAP_APP_PORT', 8080))
 
-@app.route('/', methods['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
 	return 'Hello World';
     # read and return a static web page, because why not
