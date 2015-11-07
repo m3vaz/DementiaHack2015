@@ -10,9 +10,18 @@ port = int(os.getenv('VCAP_APP_PORT', 8080))
 
 @app.route('/')
 def hello_world():
-	f = open('sharks.html')
-	return f.read();
+	return 'Hello World';
     # read and return a static web page, because why not
 
+@app.route('/datapush/', methods=['POST'])
+	# this needs to process incoming data and store that data in the database
+	return 'Pushed';
+	
+@app.route('/datapull/', methods=['GET'])
+	# this needs to provide the most recent data from the database
+	return 'Pulled';
+	
+
+	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
