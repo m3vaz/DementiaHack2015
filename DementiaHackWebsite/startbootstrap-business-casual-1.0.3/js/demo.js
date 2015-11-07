@@ -33,20 +33,29 @@ $(document).ready(function(){
         //Tracker:
             
         //Get data and plot it every second
-        var tid = setInterval(track,1000);
+        //var tid = setInterval(getData,1000);
         
         //get position data
         function getData(){
             $.ajax({
                 url:"http://mensangeli.mybluemix.net/",
                 type: "GET",
-                success : track
+                dataType:'jsonp',
+                success : track,
             }) 
         }
         
         function track(data){
             debugger;
-            $("canvas").text(data);
+            $("canvas").drawText({
+              fillStyle: '#9cf',
+              strokeStyle: '#25a',
+              strokeWidth: 2,
+              x: 150, y: 100,
+              fontSize: 48,
+              fontFamily: 'Verdana, sans-serif',
+              text: data,
+            });
             /*        
             //plot position data
             xData = ;

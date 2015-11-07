@@ -41,9 +41,8 @@ hr {
     display: none;
 }
 
-.img-full {
-    min-width: 100%;
-    min-height: 30px;
+.img-responsive {
+    clip: rect(0px,300px,700px,0px);
 } 
 
 .brand-before,
