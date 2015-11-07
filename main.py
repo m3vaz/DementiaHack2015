@@ -16,9 +16,12 @@ def hello_world():
 @app.route('/datapush/', methods=['POST'])
 def datapush():
 	# this needs to process incoming data and store that data in the database
+
 	#data push, 3 names 3 values
     
     #Convert all signal strengths to distances
+    #y = -9.048ln(x) - 68.101 , y is signal strength in dB, x is distance from beacon in m
+    # solving for:  x =  e ^((y + 68.101)/(-9.048))
     
     
     #Convert to circles, cenered at 0,0 for Bean 1
@@ -31,7 +34,11 @@ def datapush():
     
     #see which one is closest to intersecting with circle 3/within circle 3
     
-    return 'Pushed';
+    
+    
+    
+	return 'Pushed';
+
 	
 @app.route('/datapull/', methods=['GET'])
 def datapull():
