@@ -1,6 +1,7 @@
 """Cloud Foundry Implementation"""
 from flask import Flask
 import os
+import mente
 from models import Beacon, Location
 
 app = Flask(__name__)
@@ -49,11 +50,11 @@ def datapull():
 @app.route('/datatest/', methods=['GET'])
 def datatest():
 	beacons = Beacon.query.all()
-	text = '';
+	text = '<html><body><p>'
 	for beacon in beacons:
-		text = text + beacon.uuid + ' at (' + beacon.x +', '+ beacon.y + ') </ br>'
-	
+		text = text + beacon.uuid + ' at (' + str(beacon.x) +', '+ str(beacon.y) + ')<br />'
+	text = text + '</p></body></html>'
 	return text
 	
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
