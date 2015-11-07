@@ -16,6 +16,11 @@ def hello_world():
 @app.route('/datapush/', methods=['POST'])
 def datapush():
 	# this needs to process incoming data and store that data in the database
+    #y = -9.048ln(x) - 68.101 , y is signal strength in dB, x is distance from beacon in m
+    # solving for:  x =  e ^((y + 68.101)/(-9.048))
+    
+    
+    
 	return 'Pushed';
 	
 @app.route('/datapull/', methods=['GET'])
