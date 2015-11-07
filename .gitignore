@@ -1,6 +1,7 @@
 # Project specificc things
 creds.txt
 push.bat
+requirements.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
