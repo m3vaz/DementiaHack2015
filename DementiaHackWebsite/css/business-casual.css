@@ -30,7 +30,19 @@ hr {
     max-width: 400px;
     border-color: #999999;
 }
-
+.imgText{
+   position: absolute; 
+   top: 200px; 
+   left: 0; 
+   width: 100%; 
+   font-size: 3em;
+}
+.slide2{
+    color: #336699;
+}
+.slide3{
+    color: white;
+}
 .brand,
 .address-bar {
     display: none;

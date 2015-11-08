@@ -65,15 +65,30 @@ $(document).ready(function(){
     
     // when the button is clicked, start demo!
     $(".button").click(function(){
-        //draw the ibeacons on the canvas
-        //modifies the position of the beacons to better fit the screen
-        debugger;
              
         //create the canvas area
         $("canvas").attr({
             height:"800px",
             width: "650px",
         });
+        
+        //draw the hallway edges on the canvas
+        $("canvas").drawLine({
+            strokeStyle : 'black',
+            strokeWidth: 10,
+            x1: 0, y1:0,
+            x2: 0, y2: 800,
+        });
+        
+        $("canvas").drawLine({
+            strokeStyle : 'black',
+            strokeWidth: 10,
+            x1: 650, y1:0,
+            x2: 650, y2: 800,
+        });
+        
+        //draw the ibeacons on the canvas
+        //modifies the position of the beacons to better fit the screen
         
         //beacon 1:
         $("canvas").drawPolygon({
