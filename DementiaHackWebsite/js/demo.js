@@ -4,7 +4,6 @@ $(document).ready(function(){
     numBorder = 30;
     factor = 120;
     radius = 20;
-    k = 0;
     
     //constructor for tracker 
     function trackShape(color,xData, yData,time){
@@ -18,41 +17,40 @@ $(document).ready(function(){
     
     //get position data
     function track(data){  
-        k = 0;
-        
+   
         //process the data string
         dataObject = JSON.parse(data);
         
-        //get time data for checking purposes
-        trackObject.time = dataObject.time;
+        //get time from the data recieved
+        trackObject.time = new Date(dataObject.time);
+        //get current time data for checking purposes      
+        currentTime = new Date($.now());
         
         //plot position data
         trackObject.x = numBorder + dataObject.x* factor;
         trackObject.y = numBorder + dataObject.y* factor; 
         //debugger;
         
-        $("canvas").drawArc({
-            fillStyle: trackObject.color,
-            x : trackObject.x, y : trackObject.y, 
-            strokeStyle:'black',
-            radius: radius,
-        });
-    }
-    //Act if there was no data found
-    function noData(){
-        debugger;
-        k = k+1;
-        currentTime = new Date($.now());
-        
-        if((k >= 5) && ((currentTime - trackObject.time) >= 5000)){
-            debugger;
+        //If the data is old
+        if((currentTime - trackObject.time) >= 5000)
+        {
+            //debugger;
             trackObject.color = 'red',            
             $("canvas").drawArc({
                 fillStyle: trackObject.color,
                 x : trackObject.x, y : trackObject.y, 
                 strokeStyle:'black',
                 radius: radius,
-            });      
+            }); 
+        }
+        //If data is new enough
+        else{                
+            $("canvas").drawArc({
+                fillStyle: trackObject.color,
+                x : trackObject.x, y : trackObject.y, 
+                strokeStyle:'black',
+                radius: radius,
+            });
         }
     }
     
@@ -62,7 +60,7 @@ $(document).ready(function(){
         data = {uuid:'0x0000'};
         
         $.post(url, data).done(track)
-        $.post(url, data).fail(noData)
+       // $.post(url, data).fail(noData)
     }
     
     
