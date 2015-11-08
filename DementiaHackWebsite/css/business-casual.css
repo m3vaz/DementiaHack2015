@@ -5,12 +5,7 @@
  */
 
 body {
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('https://s-media-cache-ak0.pinimg.com/736x/96/4a/fe/964afe5b4ca142c8d7720e56de0777b2.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+    font-family: "Nunito","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 h1,
@@ -20,7 +15,7 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -42,21 +37,17 @@ hr {
 }
 
 .img-responsive {
-    clip: rect(0px,300px,700px,0px);
+    width :100%;
 } 
-
-.brand-before,
-.brand-name {
-    text-transform: capitalize;
-}
 
 .brand-before {
     margin: 15px 0;
+    text-transform: capitalize;
 }
 
-.brand-name {
+.logo {
     margin: 0;
-    font-size: 4em;
+    width: 300px;
 }
 
 .tagline-divider {
@@ -95,7 +86,6 @@ canvas{
     padding: 0;
     margin: auto;
     display: block;
-    width: 650px;
     background: #fff;
     background: rgba(255,255,255,0.9);
 }
@@ -107,7 +97,7 @@ canvas{
     background: rgba(0, 51, 102, 1);
     border-radius: 4px;
     color: white;
-    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 2em;
     text-align: center;
 }

@@ -60,7 +60,6 @@ $(document).ready(function(){
         data = {uuid:'0x0000'};
         
         $.post(url, data).done(track)
-       // $.post(url, data).fail(noData)
     }
     
     
@@ -68,30 +67,38 @@ $(document).ready(function(){
     $(".button").click(function(){
         //draw the ibeacons on the canvas
         //modifies the position of the beacons to better fit the screen
+        debugger;
+             
+        //create the canvas area
+        $("canvas").attr({
+            height:"800px",
+            width: "650px",
+        });
+        
         //beacon 1:
         $("canvas").drawPolygon({
             fillStyle: 'black',
             sides:3,
             x : numBorder, y : numBorder, //(0,0)
             radius: radius,
-        })
+        });
         
         //beacon 2: 
-        .drawPolygon({
+        $("canvas").drawPolygon({
             fillStyle: 'black',
             sides: 3,
             x : numBorder , y : numBorder + 5*factor, //(0,5) distances are multiplied by 5 and add 20
             radius: radius,
-        })
+        });
         
         //beacon 3: 
-        .drawPolygon({
+        $("canvas").drawPolygon({
             fillStyle: 'black',
             sides: 3,
             x : numBorder + 5*factor , y : numBorder, //(0,5)
             radius: radius,
         });
-            
+
         //Tracker:
         //getData();
         //Get data and plot it every second
