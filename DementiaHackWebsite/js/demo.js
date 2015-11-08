@@ -60,38 +60,60 @@ $(document).ready(function(){
         data = {uuid:'0x0000'};
         
         $.post(url, data).done(track)
-       // $.post(url, data).fail(noData)
     }
     
     
     // when the button is clicked, start demo!
     $(".button").click(function(){
+             
+        //create the canvas area
+        $("canvas").attr({
+            height:"800px",
+            width: "650px",
+        });
+        
+        //draw the hallway edges on the canvas
+        $("canvas").drawLine({
+            strokeStyle : 'black',
+            strokeWidth: 10,
+            x1: 0, y1:0,
+            x2: 0, y2: 800,
+        });
+        
+        $("canvas").drawLine({
+            strokeStyle : 'black',
+            strokeWidth: 10,
+            x1: 650, y1:0,
+            x2: 650, y2: 800,
+        });
+        
         //draw the ibeacons on the canvas
         //modifies the position of the beacons to better fit the screen
+        
         //beacon 1:
         $("canvas").drawPolygon({
             fillStyle: 'black',
             sides:3,
             x : numBorder, y : numBorder, //(0,0)
             radius: radius,
-        })
+        });
         
         //beacon 2: 
-        .drawPolygon({
+        $("canvas").drawPolygon({
             fillStyle: 'black',
             sides: 3,
             x : numBorder , y : numBorder + 5*factor, //(0,5) distances are multiplied by 5 and add 20
             radius: radius,
-        })
+        });
         
         //beacon 3: 
-        .drawPolygon({
+        $("canvas").drawPolygon({
             fillStyle: 'black',
             sides: 3,
             x : numBorder + 5*factor , y : numBorder, //(0,5)
             radius: radius,
         });
-            
+
         //Tracker:
         //getData();
         //Get data and plot it every second
