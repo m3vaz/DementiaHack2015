@@ -24,6 +24,30 @@ def init_db():
 	get_session().add_all([b1,b2,b3])
 	get_session().commit()
 	
+def insert_sample_data():
+	from math import sin, cos, pi
+	from models import Location
+	from datetime import datetime, timedelta
+	from decimal import Decimal
+	findx = lambda t: Decimal(sin(t) + 2.5).quantize(Decimal('1.000'))
+	findy = lambda t: Decimal(cos(t) + 2.5).quantize(Decimal('1.000'))
+	t = [x*pi/8 for x in range(0,20)];
+	starttime = datetime.now();
+	interval = timedelta(seconds=5)
+	times = [starttime+interval*x for x in range(0,20)]
+	
+	locations = []
+	for i in range(0,20):
+		val = t[i]
+		this_time = times[i]
+		loc = Location(uuid='0x0000', x=findx(val), y=findy(val), time = this_time)
+		locations.append(loc)
+		
+	get_session().add_all(locations)
+	get_session().commit()
+	
+	
+	
 def get_session():
 	return session;
 
