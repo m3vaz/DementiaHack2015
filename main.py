@@ -1,11 +1,13 @@
 """Cloud Foundry Implementation"""
-from flask import Flask
+from flask import Flask, request
 import os
 import mente
+from sqlalchemy import desc
 from models import Beacon, Location
 import math
 import datetime
 
+from decorators import crossdomain
 
 app = Flask(__name__)
 
@@ -14,6 +16,7 @@ app = Flask(__name__)
 port = int(os.getenv('VCAP_APP_PORT', 8080))
 
 @app.route('/', methods=['GET', 'POST'])
+@crossdomain(origin='*')
 def hello_world():
 	return 'Hello World';
     # read and return a static web page, because why not
@@ -45,6 +48,7 @@ def datapush(strength_1, strength_2, strength_3):
     d_1_3=r1+r3
     d_2_3=r2+r3
     
+
     if 5 <= d_1_2:
         poi=findIntersect(r1, r2, r3, center1, center2, center3)
     elif 5 <= d_1_3:
@@ -59,6 +63,12 @@ def datapush(strength_1, strength_2, strength_3):
     mente.getsession().commit()
     
     return 'Pushed';
+
+    #find intersections of circles 1 and 2
+    
+    
+    #see which one is closest to intersecting with circle 3/within circle 3
+
 
 #A and B are 2 circles touching, C is third circle
 def findIntersect(rA, rB, rC, centerA, centerB, centerC):
@@ -79,11 +89,21 @@ def findIntersect(rA, rB, rC, centerA, centerB, centerC):
         
         return poi
 	
-@app.route('/datapull/', methods=['GET'])
+@app.route('/datapull/', methods=['POST'])
+@crossdomain(origin='*')
 def datapull():
 	# this needs to provide the most recent data from the database
-	return 'Pulled';
+	import json
+	uuid = request.form.get('uuid')
+	if uuid is None:
+		return '{}';
 	
+	result = Location.query.filter(Location.uuid==uuid).order_by(desc(Location.time)).first()
+	if result:
+		return result.to_json();
+	else:
+		return '{}'
+
 @app.route('/datatest/', methods=['GET'])
 def datatest():
 	beacons = Beacon.query.all()
@@ -95,3 +115,8 @@ def datatest():
 	
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port, debug=True)
+	
+	
+from datetime import timedelta
+from flask import make_response, request, current_app
+from functools import update_wrapper
